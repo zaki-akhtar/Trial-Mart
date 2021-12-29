@@ -1,0 +1,12 @@
+
+.Collection_container{
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    /* background-color:#FEF5ED; */
+    background-color: #C9D1D3;
+    min-height: 720px;
+}
+.Collection_container h2{
+    color: black;
+}
