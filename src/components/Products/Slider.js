@@ -1,16 +1,26 @@
 
 import classes from './Slider.module.css';
-import DataSlider from './DataSlider';
 import { useState } from 'react';
+import { useLocation } from 'react-router-dom/cjs/react-router-dom.min';
+import { useDispatch } from 'react-redux';
+import { getCartState } from '../../Redux-store/CartSlice';
+import Card from '../UI/Card';
+import { UiActions } from '../../Redux-store/UiSlice';
 
 const Slider=()=>{
    
     const[ShowSlide,setShowSlide]=useState(0);
+    const[isCardshown,setCardshown]=useState(false);
 
+    const location=useLocation();
+    console.log(location.state.itemsImage);
+    let x=location.state.itemsImage.length;
+    let dispatch=useDispatch();
+    
     const CrouselSlideHandler=(e)=>{
        if(e.target.name==='right'){
            setShowSlide(prev=>{
-               if(prev===DataSlider.length-1){
+               if(prev===x-1){
                   return 0;
                }
                else{
@@ -21,7 +31,7 @@ const Slider=()=>{
        else{
         setShowSlide(prev=>{
             if(prev===0){
-               return DataSlider.length-1;
+               return x-1;
             }
             else{
                 return prev-1;
@@ -31,14 +41,50 @@ const Slider=()=>{
       
     }
 
+    const addTocartHandler=async(e)=>{
+         let id=sessionStorage.getItem('id');
+         if(id==null){
+            dispatch(UiActions.uimessage('Please Login or SignUp first'));
+            setCardshown(true);
+        }
+         console.log(id);
+         console.log(e);
+        
+      try{
+        const response=await fetch(`http://localhost:4000/cart/${id}`,{
+            method:'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body:JSON.stringify(e),
+        });
+        const data=await response.json();
+        if(!response.ok){
+            let message=`An error occured ${response.status}`
+            throw new Error (message);
+        }
+        else{
+            console.log(data);
+            dispatch(UiActions.uimessage(data));
+            setCardshown(true);
+        }
+        
+       }catch(err){
+          console.log(err);
+       }
+    
+       dispatch(getCartState({id:id}));    
+    }
+
+   const hideCardHandler=()=>{
+        setCardshown(false);
+      }
 
    
     return<div className={classes.Slider_container}>
           <div className={classes.slider_section1}>
-            {DataSlider.map((obj,index)=>{
+            {location.state.itemsImage.map((obj,index)=>{
                 return(
-                    <div className={index===ShowSlide?classes.anim:classes.slide}>
-                        <img src={process.env.PUBLIC_URL + `/Imgs/sliderImages${index + 1}.jpg`} alt=''/>
+                    <div className={index===ShowSlide?classes.anim:classes.slide} key={obj._id}>
+                        <img src={process.env.PUBLIC_URL +`${obj.url}/sliderImages${index+1}.jpg`} alt=''/>
                     </div>
                 )
             })}
@@ -48,11 +94,11 @@ const Slider=()=>{
           </div>
           <div className={classes.slider_section2}>
             <div className={classes.slider_section2_section1}>
-              <h2>Tshirt</h2>
-              <p>cotton </p>
-              <p>Rs 399</p>
+              <h2>{location.state.name}</h2>
+              <p>{location.state.quality} </p>
+              <p>Rs {location.state.price}</p>
               <button className={classes.orderButton}>BuyNow</button>
-              <button className={classes.addFavButton}>Add to favourites</button>
+              <button onClick={()=>addTocartHandler(location.state)} name={location.state} className={classes.addFavButton}>Add to favourites</button>
             </div>
             
             <div className={classes.slider_section2_section2}>
@@ -76,6 +122,7 @@ const Slider=()=>{
                 </div>
             </div>
           </div>
+          {isCardshown && <Card onClose={hideCardHandler}/>}
     </div> ;
 }
 

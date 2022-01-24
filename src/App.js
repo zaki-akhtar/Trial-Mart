@@ -1,4 +1,4 @@
-import { Fragment } from "react";
+
 import { Redirect, Route, } from "react-router";
 // import ProductAll from "./components/Products/ProductAll";
 import Header from "./components/Layout/Header";
@@ -10,11 +10,13 @@ import MenCollection from "./components/Layout/MenCollection";
 import WomenCollection from "./components/Layout/WomenCollection";
 import ProductItemCard from "./components/Products/ProductItemCard";
 import Slider from "./components/Products/Slider";
-
+import { Provider } from "react-redux";
+import store from './Redux-store/store.js'
 
 function App() {
   return (
-    <Fragment>
+     <Provider store={store}>
+   
         <Route path='/' exact>
           <Redirect to='/home'/>
         </Route>
@@ -31,7 +33,7 @@ function App() {
          <SignUp/>
         </Route >
 
-         <Route path='/Cart'>
+         <Route path='/Cart/:id' exact>
           <Cart/>
         </Route>
 
@@ -43,15 +45,16 @@ function App() {
         <WomenCollection/>
         </Route>
 
-        <Route path='/items' exact>
+        <Route path='/:types/items' exact>
           <ProductItemCard/>
         </Route>
 
-        <Route path='/items/:collections'>
+        <Route path='/items/post'>
           <Slider/>
         </Route>
 
-    </Fragment>
+    
+    </Provider>
   );
 }
 

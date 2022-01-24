@@ -7,6 +7,7 @@ import ProductAll from "../Products/ProductAll";
 import WomensImage from '../images/WOMEN.jpg';
 import MensImage from '../images/MEN.jpg';
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+import MainProduct from "../Products/MainProduct";
 
 
 const Main=()=>{
@@ -45,7 +46,8 @@ const Main=()=>{
            
         </div>
         <div className={classes.main_section3}>
-         <ProductAll/>
+         {/* <ProductAll/> */}
+         <MainProduct/>
         </div>
         <div className={classes.main_section4}>
           <div onClick={ChangeRouteclickHandler} name='womens'style={backgroundWomenImage}><h1>WOMENS</h1></div>

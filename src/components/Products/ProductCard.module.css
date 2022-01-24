@@ -1,6 +1,11 @@
 
 
-
+.card_link{
+    display: flex;
+    height: 440px;
+    justify-content: center;
+    align-items: center;
+}
 .productCard{
 
     height: 420px;
