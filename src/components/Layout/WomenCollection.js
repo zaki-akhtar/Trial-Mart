@@ -15,7 +15,7 @@ const WomenCollection=()=>{
 
    useEffect(()=>{
         const fetchData=async()=>{
-           const response=await fetch('http://localhost:4000/Women');
+           const response=await fetch(`${process.env.REACT_APP_BACKEND_URL}/Women`);
            const data=await response.json();
            setData([...data])
         }

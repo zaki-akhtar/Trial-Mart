@@ -11,6 +11,7 @@ const Slider=()=>{
    
     const[ShowSlide,setShowSlide]=useState(0);
     const[isCardshown,setCardshown]=useState(false);
+    
 
     const location=useLocation();
     console.log(location.state.itemsImage);
@@ -51,7 +52,8 @@ const Slider=()=>{
          console.log(e);
         
       try{
-        const response=await fetch(`http://localhost:4000/cart/${id}`,{
+       
+        const response=await fetch(`${process.env.REACT_APP_BACKEND_URL}/cart/${id}`,{
             method:'POST',
             headers: { 'Content-Type': 'application/json' },
             body:JSON.stringify(e),
@@ -77,6 +79,17 @@ const Slider=()=>{
    const hideCardHandler=()=>{
         setCardshown(false);
       }
+   const orderItemHandlr=()=>{
+       let id=sessionStorage.getItem('id');
+       if(id===null){
+           dispatch(UiActions.uimessage('please Login or SignUp first'));
+           setCardshown(true);
+       }
+       else if(id!=null){
+            dispatch(UiActions.uimessage('Your Order successful'));
+            setCardshown(true);
+       }
+   }
 
    
     return<div className={classes.Slider_container}>
@@ -97,7 +110,7 @@ const Slider=()=>{
               <h2>{location.state.name}</h2>
               <p>{location.state.quality} </p>
               <p>Rs {location.state.price}</p>
-              <button className={classes.orderButton}>BuyNow</button>
+              <button onClick={orderItemHandlr} className={classes.orderButton}>BuyNow</button>
               <button onClick={()=>addTocartHandler(location.state)} name={location.state} className={classes.addFavButton}>Add to favourites</button>
             </div>
             

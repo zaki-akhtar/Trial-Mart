@@ -10,7 +10,7 @@ const MenCollection=()=>{
     const [Data,setData]=useState([]);
     useEffect(()=>{
      const fetchData=async()=>{
-        const response=await fetch('http://localhost:4000/Men');
+        const response=await fetch(`${process.env.REACT_APP_BACKEND_URL}/Men`);
         const data=await response.json();
         setData([...data]);
      }

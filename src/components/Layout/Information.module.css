@@ -1,0 +1,26 @@
+
+.main_section2_child{
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   align-items: center;
+   padding: auto 20px; 
+   text-align: center; 
+   width: 25%;
+}
+.s2_c1 i{
+   color: blue;
+}
+.s2_c2 i{
+    color: green;
+}
+.s2_c3 i{
+    color: rgb(243, 4, 4);
+}
+@media screen and (max-width:600px) {
+    .main_section2_child{
+        width: 80%;
+        margin: 10px auto;
+       
+    }
+}

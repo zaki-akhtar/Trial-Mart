@@ -2,9 +2,9 @@ import classes from './Cart.module.css';
 // import CartData from '../../CartData';
 import CartItem from './CartItem';
 import { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { getCartState } from '../../Redux-store/CartSlice';
+import {  useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom/cjs/react-router-dom.min';
+import CartOrderButton from './CartOrderButton';
 
 const Cart=()=>{
    
@@ -33,7 +33,7 @@ const Cart=()=>{
       <div className={classes.Cart_section2}>
          <h2>Total Price</h2>
          <h4>Rs  {totalprice}</h4>
-         <button>BuyNow</button>
+         <CartOrderButton param={param} CartData={CartData}/>
      </div>
     </div>
 }

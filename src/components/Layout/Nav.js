@@ -7,7 +7,6 @@ import { Fragment } from 'react/cjs/react.production.min';
 import { useDispatch, useSelector } from 'react-redux';
 import { CartActions, getCartState } from '../../Redux-store/CartSlice';
 import { AuthActions } from '../../Redux-store/AuthSlice';
-import { Redirect, useLocation } from 'react-router-dom/cjs/react-router-dom.min';
 
 
 
@@ -16,32 +15,24 @@ const Nav=()=>{
     let dispatch=useDispatch();
     let cartQty=useSelector(state=>state.Cart.quantity);
     let auths=useSelector(state=>state.Auth);
-    let location=useLocation();
+  
 
     const [isSearch,setSearchInput]=useState(false);
     const [isVisibleNav,setVisibleNav]=useState(false);
-    const [qty,setQty]=useState(cartQty);
+   
     const [auth,setAuth]=useState(auths);
+    const [isVisibleLogin,setVisibleLogin]=useState(null);
     console.log(auth);
     let id=sessionStorage.getItem('id');
+   
     dispatch(getCartState(id));
     console.log(cartQty);
   
+    useEffect(()=>{
+        setVisibleLogin(id);
+    },[]);
 
-
-    // useEffect(()=>{
-      
-    // });
     
-    // useEffect(()=>{
-    //    let Qty=CartData.reduce((total,obj)=>{
-    //         return total+=obj.quantity;
-    //   },0);
-    //   setQty(Qty);
-    //   setAuth(auths);
-    // },[CartData,dispatch,auths]);
-
-
     const searchHandler=()=>{
          setSearchInput(prev=>!prev);
     }
@@ -68,16 +59,16 @@ const Nav=()=>{
            <li className={`${isVisibleNav &&classes.nav_list_opa} ${classes.nav_list}`}>
                 <NavLink to='/'>Items</NavLink>
                 <ul  className={classes.navListContainer}>
-                  <li><Link to="/">Link 1</Link></li>
-                  <li><Link to="/">Link 2</Link></li>
-                  <li><Link to="/">Link 3</Link></li>
-                  <li><Link to="/">Link 1</Link></li>
-                  <li><Link to="/">Link 2</Link></li>
+                  <li><Link to={{pathname:'/collections/post/All',state:{name:'All'}}}>All</Link></li>
+                  <li><Link to={{pathname:"/collections/post/Tshirt",state:{name:'Tshirt'}}}>Tshirt</Link></li>
+                  <li><Link to={{pathname:"/collections/post/Hoodie", state:{name:'Hoodie'}}}>Hoodie</Link></li>
+                  <li><Link to={{pathname:"/collections/post/Shoes",state:{name:'Shoes'}}}>Shoes</Link></li>
+                  <li><Link to={{pathname:"/collections/post/jeans",state:{name:'Jeans'}}}>Jeans</Link></li>
                 </ul>
              </li>
-            <li className={`${isVisibleNav &&classes.nav_list_opa} ${classes.nav_list}`}><NavLink to='/Login'>Login</NavLink></li>
+           {isVisibleLogin===null && <li className={`${isVisibleNav &&classes.nav_list_opa} ${classes.nav_list}`}><NavLink to='/Login'>Login</NavLink></li>}
             <li className={`${isVisibleNav &&classes.nav_list_opa} ${classes.nav_list}`}><NavLink to='/signUp'>signUp</NavLink></li>
-            <li className={`${isVisibleNav &&classes.nav_list_opa} ${classes.nav_list}`} onClick={logoutHandler}><NavLink to='/'>Logout</NavLink></li>
+           {isVisibleLogin!==null &&  <li className={`${isVisibleNav &&classes.nav_list_opa} ${classes.nav_list}`} onClick={logoutHandler}><NavLink to='/'>LogOut</NavLink></li>}
             <li className={`${isVisibleNav &&classes.nav_list_opa} ${classes.nav_list}`}><NavLink to={`/Cart/${auth.id}`}><img src={cartImage} alt=''/><span>{cartQty}</span></NavLink></li></Fragment> }
 
             {<li className={classes.menu} onClick={visibleHandler}><img src={menuIcon}/></li> }

@@ -3,9 +3,10 @@
     display: flex;
     justify-content: space-around;
     flex-wrap: wrap;
-    /* background-color:#C9D1D3; */
-    min-height: 720px;
+    min-height: 710px;
     background-color: #04293A;
+    padding-top: 40px;
+    padding-bottom: 40px;
 }
 .Collection_container h2{
     color: white;

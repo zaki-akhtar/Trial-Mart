@@ -1,0 +1,43 @@
+ .card_likes_icon{
+    position: absolute;
+    right:2%;
+    top:72%;
+    color: white;
+    transition: 0.04s ease-out;
+    z-index: 10;
+}
+
+.card_likes_icon:hover{
+    transform: scale(1.2,1.2);
+}
+.card_likes_icon_after{
+    position: absolute;
+    right:2%;
+    top:72%;
+    /* transition: 0.4s ease-out; */
+    z-index: 10;
+    color: red;
+    transform: scale(1.2,1.2);
+}
+
+.bump {
+    animation: bump 300ms ease-out;
+  }
+  
+  @keyframes bump {
+    0% {
+      transform: scale(1);
+    }
+    10% {
+      transform: scale(0.9);
+    }
+    30% {
+      transform: scale(1.1);
+    }
+    50% {
+      transform: scale(1.15);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }

@@ -14,8 +14,8 @@
     border: 2px solid white;
     transition: 0.5s ease;
     margin: 15px;
-    color: white;
-   
+    color:white;
+   box-shadow:5px 5px 20px rgb(0, 0, 0.5)
 
 }
 .productCard:hover{

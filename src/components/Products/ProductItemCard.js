@@ -1,5 +1,6 @@
 
 import { Link, useLocation } from 'react-router-dom';
+import Likes from '../UI/Likes';
 import classes from './ProductItemCard.module.css';
 
 
@@ -13,11 +14,11 @@ const ProductItemCard=()=>{
           return<Link className={classes.card_item_link} to={{pathname:'/items/post',state:obj}}key={obj._id}>
            <div  className={classes.productItemCard} >
            <img src={obj.url} alt='' />
-           <i class="fas fa-heart f"></i>
+           <Likes id={obj._id}/>
            <div>
             <h4>{obj.name}</h4>
-            <p>{obj.quality}</p>
-            <p>{obj.price}</p>
+            <p>Lorem ipsum is a simply </p>
+            <p>Rs {obj.price}</p>
             </div>
            </div>
            </Link>
