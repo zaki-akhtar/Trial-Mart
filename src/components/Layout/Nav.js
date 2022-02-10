@@ -7,6 +7,7 @@ import { Fragment } from 'react/cjs/react.production.min';
 import { useDispatch, useSelector } from 'react-redux';
 import { CartActions, getCartState } from '../../Redux-store/CartSlice';
 import { AuthActions } from '../../Redux-store/AuthSlice';
+import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 
 
 
@@ -15,6 +16,7 @@ const Nav=()=>{
     let dispatch=useDispatch();
     let cartQty=useSelector(state=>state.Cart.quantity);
     let auths=useSelector(state=>state.Auth);
+    let history=useHistory();
   
 
     const [isSearch,setSearchInput]=useState(false);
@@ -44,7 +46,7 @@ const Nav=()=>{
         sessionStorage.removeItem('id');
         dispatch(AuthActions.logOut);
         dispatch(CartActions.initialState);
-        window.location.reload()
+        window.location.reload();
     }
     
     
