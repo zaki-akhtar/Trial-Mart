@@ -71,7 +71,7 @@ import classes from './Signup.module.css';
              <input ref={emailref}type='email'placeholder=' Email'/>
              <input ref={passwordref}type='password' placeholder=' Password'/>
              <button type='submit'>Submit</button>
-             <p>Already User ? <NavLink to='/Login'>Login</NavLink></p>
+             <p>Already User ? <NavLink to='/home/Login'>Login</NavLink></p>
          </form>
          {isCardshown && <Card onClose={cardCloseHandler}/>}
          {isSpinner && <Spinner/>}

@@ -9,6 +9,7 @@ import { getCartState } from '../../Redux-store/CartSlice';
 import { UiActions } from '../../Redux-store/UiSlice';
 import Card from '../UI/Card';
 import Spinner from '../UI/Spinner';
+
 const Login=()=>{
      
     let dispatch=useDispatch();
@@ -83,7 +84,7 @@ const Login=()=>{
             <input ref={passwordref}type='password' placeholder=' Password'/>
             <button type='submit'>Log In</button>
             <div>
-                <NavLink to='/signUp'>create Acount</NavLink>
+                <NavLink to='/home/signUp'>create Acount</NavLink>
                 <NavLink to='/'>Help</NavLink>
             </div>
         </form>

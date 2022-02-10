@@ -1,12 +1,13 @@
 import { Fragment, useState } from "react";
 import { useDispatch } from "react-redux";
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import { UiActions } from "../../Redux-store/UiSlice";
 import Card from '../UI/Card';
 
 
 const CartOrderButton=(props)=>{
     const [isShowCart,setShowCart]=useState(false);
-  
+    let history=useHistory();
     let dispatch=useDispatch();
     console.log(props.CartData.length);
 
@@ -47,7 +48,7 @@ const CartOrderButton=(props)=>{
 
     const cartCloseHandler=()=>{
         setShowCart(false);
-        // window.location.reload();
+        history.replace('/');
     }
 
 
